@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BrainGauge IQ Test</title>
+<meta name="theme-color" content="#2f4bff">
+<meta name="description" content="Age-matched reasoning test that works offline.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="BrainGauge">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>
+:root{--bg:#eef1f6;--card:#fff;--tx:#101828;--mu:#5b6578;--ac:#2f4bff;--on:#fff;--ok:#12803c;--bad:#c0262d;--bd:#d8deea;--hi:#ffb400;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1220;--card:#151c2e;--tx:#eef1fb;--mu:#9aa5bf;--ac:#7d93ff;--on:#0d1220;--ok:#4ade80;--bad:#ff7b81;--bd:#26304a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d1220;--card:#151c2e;--tx:#eef1fb;--mu:#9aa5bf;--ac:#7d93ff;--on:#0d1220;--ok:#4ade80;--bad:#ff7b81;--bd:#26304a;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 "Avenir Next","Segoe UI",system-ui,sans-serif}
+#app{max-width:560px;margin:0 auto;padding:16px}
+h1{font-size:2.2rem;line-height:1.1;margin:.3em 0 .4em;letter-spacing:-.02em}
+h2{font-size:1.25rem;line-height:1.3;margin:.3em 0 .6em}
+p{margin:.4em 0}.mu{color:var(--mu)}small{color:var(--mu)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;margin:12px 0}
+button{font:inherit;color:inherit;cursor:pointer}
+.btn{background:var(--ac);color:var(--on);border:0;border-radius:10px;padding:12px 18px;font-weight:600;width:100%}
+.btn.alt{background:transparent;color:var(--tx);border:1px solid var(--bd)}
+.row{display:flex;gap:8px;margin:10px 0}.row>*{flex:1}
+.top{display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.bar{height:6px;background:var(--bd);border-radius:3px;margin:8px 0}.bar i{display:block;height:100%;background:var(--ac);border-radius:3px}
+.vis{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 14px;font-size:1.5rem;font-weight:700;letter-spacing:.02em}
+.vis svg,.opt svg{border:1px solid var(--bd);border-radius:10px;padding:4px;background:var(--bg);color:var(--tx)}
+.qm{font-size:2rem;color:var(--ac)}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;background:var(--bg);border:2px solid var(--bd);border-radius:10px;padding:12px}
+.opt.sel{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 12%,var(--card))}
+.pat .opts{grid-template-columns:1fr 1fr}.pat .opt{display:flex;justify-content:center}
+.dots{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}
+.dots button{width:28px;height:28px;border-radius:50%;border:1px solid var(--bd);background:var(--card);font-size:.75rem;padding:0}
+.dots .a{background:var(--ac);color:var(--on);border-color:var(--ac)}.dots .f{border:2px solid var(--hi)}.dots .c{outline:2px solid var(--tx);outline-offset:1px}
+.score{text-align:center}.score .n{font-size:4.5rem;font-weight:800;line-height:1;letter-spacing:-.03em}
+.dm{display:grid;grid-template-columns:90px 1fr 40px;gap:8px;align-items:center;margin:8px 0;font-size:.95rem}
+.dm .bar{margin:0;height:10px}.dm .bar i{background:var(--hi)}
+details{margin:8px 0}summary{cursor:pointer;font-weight:600}
+.rv{border-top:1px solid var(--bd);padding:10px 0}.ok{color:var(--ok)}.no{color:var(--bad)}
+.rv .vis{font-size:1rem}.rv svg{width:44px;height:44px}
+</style></head><body><div id="app"></div>
+<script>
+const $=s=>document.querySelector(s),R=(a,b)=>Math.floor(Math.random()*(b-a+1))+a,
+sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=R(0,i);[a[i],a[j]]=[a[j],a[i]]}return a},pk=a=>a[R(0,a.length-1)];
+const DOM=["Numerical","Verbal","Logic","Pattern"],
+AGES=[{n:"6–9",lv:[1,1,2,2,3],m:.55,t:1500},{n:"10–13",lv:[1,2,2,3,4],m:.5,t:1500},{n:"14–17",lv:[1,2,3,4,5],m:.47,t:1200},{n:"18–39",lv:[1,2,3,4,5],m:.45,t:1200},{n:"40–59",lv:[1,2,3,4,5],m:.45,t:1500},{n:"60+",lv:[1,2,3,4,5],m:.42,t:1800}];
+let S=null,timer=null,AG=-1;
+function hist(){try{return JSON.parse(localStorage.getItem("bg_h")||"[]")}catch(e){return[]}}
+function saveH(h){try{localStorage.setItem("bg_h",JSON.stringify(h.slice(-10)))}catch(e){}}
+/* Numerical generator */
+function numOpts(ans){const s=new Set([ans]);while(s.size<4)s.add(ans+pk([-1,1])*R(1,6));const o=sh([...s]);return{o:o.map(String),a:o.indexOf(ans)}}
+function genNum(l){let t,e,a,b,d;
+ if(l==1){a=R(1,20);d=R(2,9);t=[0,1,2,3,4,5].map(i=>a+i*d);e="Each number adds "+d+".";}
+ else if(l==2){a=R(1,4);d=R(2,3);t=[0,1,2,3,4,5].map(i=>a*d**i);e="Each number is multiplied by "+d+".";}
+ else if(l==3){a=R(1,9);d=R(1,3);t=[a];for(let i=0;i<5;i++)t.push(t[i]+d+i);e="The gap grows by 1 each step (+"+d+", +"+(d+1)+", +"+(d+2)+" …).";}
+ else if(l==4){a=R(2,9);b=R(30,60);const x=R(2,5),y=R(2,6);t=[];for(let i=0;i<3;i++)t.push(a+i*x,b-i*y);e="Two series are interleaved: one adds "+x+", the other subtracts "+y+".";}
+ else{a=R(1,4);b=R(2,5);t=[a,b];for(let i=2;i<6;i++)t.push(t[i-1]+t[i-2]);e="Each number is the sum of the two before it.";}
+ const o=numOpts(t[5]);return{d:0,l,q:"What number comes next?",v:t.slice(0,5).join(", ")+", <span class=qm>?</span>",o:o.o,a:o.a,e}}
+/* Pattern generator */
+const cell=(a,n)=>{let c="";for(let i=0;i<n;i++)c+=`<circle cx="${40-(n-1)*8+i*16}" cy="68" r="4" fill="currentColor"/>`;return `<svg viewBox="0 0 80 80" width="56" height="56"><g transform="rotate(${a} 40 34)"><path d="M40 12v44M40 12l-10 12M40 12l10 12" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>${c}</svg>`};
+function genPat(l){const s=pk([45,90]),st=[];let a=R(0,7)*45,n=R(1,3);
+ for(let i=0;i<5;i++){st.push([((a%360)+360)%360,n]);
+  if(l==1)a+=s;else if(l==2)n=n%4+1;else if(l==3){a+=s;n=n%4+1}else if(l==4)a+=i%2?2*s:s;else{a+=s*(i+1);n=n%4+1}}
+ const e=["","The arrow turns "+s+"° each step.","The dots go up by 1 each step (back to 1 after 4).","The arrow turns "+s+"° and the dots go up by 1 each step.","The arrow turns "+s+"°, then "+2*s+"°, alternately.","The arrow’s turn grows each step ("+s+"°, "+2*s+"°, …) while the dots cycle 1–4."][l];
+ const ans=st[4],seen=new Set([ans.join()]),op=[ans];
+ while(op.length<4){const c=[(ans[0]+pk([-90,-45,45,90,135])+360)%360,Math.max(1,Math.min(4,ans[1]+pk([-1,0,0,1])))];if(!seen.has(c.join())){seen.add(c.join());op.push(c)}}
+ const o=sh(op);return{d:3,l,q:"Which figure comes next in the sequence?",v:st.slice(0,4).map(x=>cell(x[0],x[1])).join("")+"<span class=qm>?</span>",o:o.map(x=>cell(x[0],x[1])),a:o.indexOf(ans),e,pat:1}}
+/* Static banks: [level, question, [correct first, ...wrong], explanation] */
+const VER=[
+[1,"Hot is to cold as up is to …",["down","high","warm","top"],"Opposites."],
+[1,"Which word means the same as “big”?",["Large","Tiny","Thin","Quiet"],"Large is a synonym of big."],
+[2,"Book is to reading as fork is to …",["eating","cooking","spoon","kitchen"],"Each tool is paired with its use."],
+[2,"Which word is closest in meaning to “rapid”?",["Swift","Steady","Late","Rough"],"Swift means fast."],
+[3,"Doctor is to hospital as teacher is to …",["school","student","lesson","chalk"],"A professional and their workplace."],
+[3,"Which word is the opposite of “scarce”?",["Abundant","Rare","Costly","Hidden"],"Scarce means in short supply; abundant means plentiful."],
+[4,"“Candid” most nearly means …",["frank","hidden","cheerful","careful"],"Candid means open and honest."],
+[4,"Prologue is to epilogue as overture is to …",["finale","orchestra","opera","melody"],"Each pair is a beginning and its matching ending."],
+[5,"“Ephemeral” most nearly means …",["short-lived","enormous","ancient","fragile"],"Ephemeral things last a very short time."],
+[5,"Lax is to strict as lenient is to …",["harsh","gentle","kind","tired"],"Each pair is opposites; lenient is the opposite of harsh."]];
+const LOG=[
+[1,"All cats are animals. Tom is a cat. Therefore Tom is …",["an animal","a dog","not an animal","a bird"],"If all cats are animals, Tom is an animal."],
+[1,"Which does not belong: Apple, Banana, Carrot, Grape?",["Carrot","Apple","Banana","Grape"],"Carrot is a vegetable; the rest are fruit."],
+[2,"Sam is taller than Ben. Ben is taller than Lee. Who is shortest?",["Lee","Ben","Sam","Cannot tell"],"Sam > Ben > Lee."],
+[2,"Which number does not belong: 3, 5, 7, 9, 11?",["9","3","7","11"],"9 is the only non-prime."],
+[3,"If it rains, the match is cancelled. The match was not cancelled. What follows?",["It did not rain","It rained","It is sunny","Nothing"],"If rain always cancels the match, no cancellation means no rain."],
+[3,"Which number does not belong: 4, 9, 16, 20, 25?",["20","9","16","25"],"The others are perfect squares."],
+[4,"No reptiles are mammals. Some pets are reptiles. Which must be true?",["Some pets are not mammals","All pets are reptiles","No pets are mammals","Some mammals are pets"],"The pets that are reptiles cannot be mammals."],
+[4,"A father is 3 times as old as his son. In 12 years he will be twice as old. How old is the son now?",["12","6","9","15"],"3s + 12 = 2(s + 12), so s = 12."],
+[5,"Anna: “Ben is lying.” Ben: “Cara is lying.” Cara: “Anna and Ben are both lying.” Who is telling the truth?",["Only Ben","Only Anna","Only Cara","All three"],"If Anna were truthful, Cara would be too, which contradicts Cara’s claim. So Anna lies, Ben is truthful, Cara lies."],
+[5,"A clock gains 5 minutes every hour and is set right at noon. What does it show when the true time is 6 pm?",["6:30 pm","6:05 pm","6:25 pm","6:35 pm"],"6 hours × 5 minutes = 30 minutes gained."]];
+function stat(bank,d,l,u){const x=pk(bank.filter(b=>b[0]==l&&!u.has(b[1])));u.add(x[1]);const c=x[2][0],o=sh(x[2]);return{d,l,q:x[1],o,a:o.indexOf(c),e:x[3]}}
+function build(c){const q=[],u=new Set();c.lv.forEach(l=>q.push(genNum(l),stat(VER,1,l,u),stat(LOG,2,l,u),genPat(l)));return q}
+/* Flow */
+function intro(){const h=hist();$("#app").innerHTML=`<h1>BrainGauge</h1><p>A 20-question reasoning test across numbers, words, logic and patterns. It gets harder as you go.</p>
+<div class=card><b>Choose your age group</b><div class=opts id=ages style="grid-template-columns:1fr 1fr 1fr;margin:10px 0">${AGES.map((a,k)=>`<button class="opt${k==AG?" sel":""}" data-g=${k}>${a.n}</button>`).join("")}</div><b>20 questions · ${AG<0?"20–30":AGES[AG].t/60} minutes</b><p class=mu>Questions and scoring are matched to the age group. You can go back, flag questions and change answers until you submit. Skipped questions count as wrong.</p></div>
+<button class=btn id=go ${AG<0?"disabled":""}>Start test</button>
+${h.length?`<div class=card><b>Your past scores</b><p class=mu>${h.slice().reverse().map(x=>x.iq+" (age "+(x.a||"?")+")").join(" · ")}</p></div>`:""}
+<p><small>This is an estimate for fun and practice, not a clinical or professionally administered IQ test. Scores are saved only in this browser.</small></p>`;
+$("#go").onclick=start;$("#ages").onclick=e=>{const b=e.target.closest("button");if(b){AG=+b.dataset.g;intro()}}}
+function start(){const c=AGES[AG];S={c,qs:build(c),ans:Array(20).fill(null),fl:Array(20).fill(false),i:0,left:c.t,warn:0};clearInterval(timer);timer=setInterval(()=>{S.left--;tick();if(S.left<=0)finish()},1000);show()}
+const fmt=s=>Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
+function tick(){const t=$("#tm");if(t){t.textContent=fmt(Math.max(0,S.left));t.style.color=S.left<120?"var(--bad)":""}}
+function show(){const q=S.qs[S.i],n=S.ans.filter(x=>x!=null).length;
+$("#app").innerHTML=`<div class=top><span>Question ${S.i+1} of 20</span><span id=tm></span></div><div class=bar><i style="width:${n*5}%"></i></div>
+<div class="card ${q.pat?"pat":""}"><small>${DOM[q.d]}</small><h2>${q.q}</h2>${q.v?`<div class=vis>${q.v}</div>`:""}
+<div class=opts>${q.o.map((o,k)=>`<button class="opt${S.ans[S.i]===k?" sel":""}" data-k=${k}>${o}</button>`).join("")}</div></div>
+<div class=row><button class="btn alt" id=pv ${S.i?"":"disabled"}>Back</button><button class="btn alt" id=fl>${S.fl[S.i]?"Unflag":"Flag"}</button><button class="btn" id=nx>${S.i<19?"Next":"Review"}</button></div>
+<div class=dots>${S.qs.map((_,k)=>`<button data-j=${k} class="${S.ans[k]!=null?"a ":""}${S.fl[k]?"f ":""}${k==S.i?"c":""}">${k+1}</button>`).join("")}</div>
+<button class=btn id=sb>${n==20?"Submit test":"Submit test ("+(20-n)+" unanswered)"}</button>`;tick()}
+$("#app").onclick=e=>{if(!S||S.done)return;const b=e.target.closest("button");if(!b)return;
+ if(b.dataset.k!=null){S.ans[S.i]=+b.dataset.k;S.warn=0;show()}
+ else if(b.dataset.j!=null){S.i=+b.dataset.j;show()}
+ else if(b.id=="pv"){S.i--;show()}
+ else if(b.id=="nx"){if(S.i<19)S.i++;else{const f=S.fl.findIndex(x=>x);const u=S.ans.findIndex(x=>x==null);S.i=u>=0?u:f>=0?f:19}show()}
+ else if(b.id=="fl"){S.fl[S.i]=!S.fl[S.i];show()}
+ else if(b.id=="sb"){const u=S.ans.filter(x=>x==null).length;if(u&&!S.warn){S.warn=1;b.textContent=u+" unanswered. Tap again to submit";return}finish()}};
+const cdf=z=>{const t=1/(1+.2316419*Math.abs(z)),d=.3989423*Math.exp(-z*z/2),p=d*t*(.3193815+t*(-.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));return z>0?1-p:p};
+function finish(){clearInterval(timer);S.done=1;const w=[0,0,0,0],m=[0,0,0,0];let raw=0;
+S.qs.forEach((q,k)=>{m[q.d]+=q.l;if(S.ans[k]===q.a){w[q.d]+=q.l;raw+=q.l}});
+const mx=m[0]+m[1]+m[2]+m[3],iq=Math.round(Math.max(70,Math.min(145,100+15*(raw/mx-S.c.m)/.15))),pc=Math.min(99.9,Math.max(0.1,cdf((iq-100)/15)*100));
+const date=new Date().toLocaleDateString(),h=hist();h.push({iq,d:date,a:S.c.n});saveH(h);S.res={iq};
+const cat=iq>=130?"Very high":iq>=115?"Above average":iq>=85?"Average":"Below average";
+const arc=Math.round((iq-70)/75*100);
+$("#app").innerHTML=`<div class="card score"><small>Your estimated IQ</small>
+<svg viewBox="0 0 200 110" width="220"><path d="M20 100A80 80 0 0 1 180 100" fill="none" stroke="var(--bd)" stroke-width="14" stroke-linecap="round" pathLength="100"/><path d="M20 100A80 80 0 0 1 180 100" fill="none" stroke="var(--ac)" stroke-width="14" stroke-linecap="round" pathLength="100" stroke-dasharray="${arc} 100"/><text x="100" y="92" text-anchor="middle" font-size="44" font-weight="800" fill="var(--tx)">${iq}</text></svg>
+<p><b>${cat}</b> · likely range ${iq-7}–${iq+7}</p><p class=mu>Higher than about ${Math.round(pc)}% of people aged ${S.c.n} on the rough scale used here.</p></div>
+<div class=card><b>By area</b>${DOM.map((n,k)=>{const p=Math.round(w[k]/m[k]*100);return `<div class=dm><span>${n}</span><div class=bar><i style="width:${p}%"></i></div><span>${p}%</span></div>`}).join("")}</div>
+<details class=card><summary>Review answers (${S.qs.filter((q,k)=>S.ans[k]!==q.a).length} missed)</summary>${S.qs.map((q,k)=>{const ok=S.ans[k]===q.a;return `<div class=rv><b class="${ok?"ok":"no"}">${ok?"Correct":"Missed"}</b> · <small>${DOM[q.d]}, level ${q.l}</small><p>${q.q}</p>${q.v?`<div class=vis>${q.v}</div>`:""}${ok?"":`<p class=mu>You chose: ${S.ans[k]==null?"no answer":q.o[S.ans[k]]}</p>`}<p>Answer: ${q.o[q.a]}</p><p class=mu>${q.e}</p></div>`}).join("")}</details>
+<div class=row><button class="btn alt" id=cp>Copy result</button><button class=btn id=re>New test</button></div>
+<p><small>Estimate only. Scores are adjusted by age group using rough assumptions, not real norm data, and are not a clinical IQ result.</small></p>`;
+$("#re").onclick=intro;$("#cp").onclick=async()=>{const t="I scored an estimated IQ of "+iq+" on BrainGauge (age group "+S.c.n+").";try{await navigator.clipboard.writeText(t);$("#cp").textContent="Copied"}catch(e){$("#cp").textContent=t}}}
+intro();
+if("serviceWorker" in navigator&&/^https?:$/.test(location.protocol)){window.addEventListener("load",()=>{try{navigator.serviceWorker.register("sw.js")}catch(e){}})}
+</script></body></html>
