@@ -44,18 +44,130 @@ button{font:inherit;color:inherit;cursor:pointer}
 details{margin:8px 0}summary{cursor:pointer;font-weight:600}
 .rv{border-top:1px solid var(--bd);padding:10px 0}.ok{color:var(--ok)}.no{color:var(--bad)}
 .rv .vis{font-size:1rem}.rv svg{width:44px;height:44px}
+</style>
+<style>
+:root{--bg:#eef1f6;--card:#fff;--tx:#101828;--mu:#5b6578;--ac:#2f4bff;--on:#fff;--ok:#12803c;--bad:#c0262d;--bd:#d8deea;--hi:#ffb400;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1220;--card:#151c2e;--tx:#eef1fb;--mu:#9aa5bf;--ac:#7d93ff;--on:#0d1220;--ok:#4ade80;--bad:#ff7b81;--bd:#26304a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d1220;--card:#151c2e;--tx:#eef1fb;--mu:#9aa5bf;--ac:#7d93ff;--on:#0d1220;--ok:#4ade80;--bad:#ff7b81;--bd:#26304a;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 "Avenir Next","Segoe UI",system-ui,sans-serif}
+#app{max-width:560px;margin:0 auto;padding:16px}
+h1{font-size:2.2rem;line-height:1.1;margin:.3em 0 .4em;letter-spacing:-.02em}
+h2{font-size:1.25rem;line-height:1.3;margin:.3em 0 .6em}
+p{margin:.4em 0}.mu{color:var(--mu)}small{color:var(--mu)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;margin:12px 0}
+button{font:inherit;color:inherit;cursor:pointer}
+.btn{background:var(--ac);color:var(--on);border:0;border-radius:10px;padding:12px 18px;font-weight:600;width:100%}
+.btn.alt{background:transparent;color:var(--tx);border:1px solid var(--bd)}
+.row{display:flex;gap:8px;margin:10px 0}.row>*{flex:1}
+.top{display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.bar{height:6px;background:var(--bd);border-radius:3px;margin:8px 0}.bar i{display:block;height:100%;background:var(--ac);border-radius:3px}
+.vis{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 14px;font-size:1.5rem;font-weight:700;letter-spacing:.02em}
+.vis svg,.opt svg{border:1px solid var(--bd);border-radius:10px;padding:4px;background:var(--bg);color:var(--tx)}
+.qm{font-size:2rem;color:var(--ac)}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;background:var(--bg);border:2px solid var(--bd);border-radius:10px;padding:12px}
+.opt.sel{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 12%,var(--card))}
+.pat .opts{grid-template-columns:1fr 1fr}.pat .opt{display:flex;justify-content:center}
+.dots{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}
+.dots button{width:28px;height:28px;border-radius:50%;border:1px solid var(--bd);background:var(--card);font-size:.75rem;padding:0}
+.dots .a{background:var(--ac);color:var(--on);border-color:var(--ac)}.dots .f{border:2px solid var(--hi)}.dots .c{outline:2px solid var(--tx);outline-offset:1px}
+.score{text-align:center}.score .n{font-size:4.5rem;font-weight:800;line-height:1;letter-spacing:-.03em}
+.dm{display:grid;grid-template-columns:90px 1fr 40px;gap:8px;align-items:center;margin:8px 0;font-size:.95rem}
+.dm .bar{margin:0;height:10px}.dm .bar i{background:var(--hi)}
+details{margin:8px 0}summary{cursor:pointer;font-weight:600}
+.rv{border-top:1px solid var(--bd);padding:10px 0}.ok{color:var(--ok)}.no{color:var(--bad)}
+.rv .vis{font-size:1rem}.rv svg{width:44px;height:44px}
+</style>
+<style>
+:root{--bg:#eef1f6;--card:#fff;--tx:#101828;--mu:#5b6578;--ac:#2f4bff;--on:#fff;--ok:#12803c;--bad:#c0262d;--bd:#d8deea;--hi:#ffb400;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1220;--card:#151c2e;--tx:#eef1fb;--mu:#9aa5bf;--ac:#7d93ff;--on:#0d1220;--ok:#4ade80;--bad:#ff7b81;--bd:#26304a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d1220;--card:#151c2e;--tx:#eef1fb;--mu:#9aa5bf;--ac:#7d93ff;--on:#0d1220;--ok:#4ade80;--bad:#ff7b81;--bd:#26304a;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 "Avenir Next","Segoe UI",system-ui,sans-serif}
+#app{max-width:560px;margin:0 auto;padding:16px}
+h1{font-size:2.2rem;line-height:1.1;margin:.3em 0 .4em;letter-spacing:-.02em}
+h2{font-size:1.25rem;line-height:1.3;margin:.3em 0 .6em}
+p{margin:.4em 0}.mu{color:var(--mu)}small{color:var(--mu)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;margin:12px 0}
+button{font:inherit;color:inherit;cursor:pointer}
+.btn{background:var(--ac);color:var(--on);border:0;border-radius:10px;padding:12px 18px;font-weight:600;width:100%}
+.btn.alt{background:transparent;color:var(--tx);border:1px solid var(--bd)}
+.row{display:flex;gap:8px;margin:10px 0}.row>*{flex:1}
+.top{display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.bar{height:6px;background:var(--bd);border-radius:3px;margin:8px 0}.bar i{display:block;height:100%;background:var(--ac);border-radius:3px}
+.vis{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 14px;font-size:1.5rem;font-weight:700;letter-spacing:.02em}
+.vis svg,.opt svg{border:1px solid var(--bd);border-radius:10px;padding:4px;background:var(--bg);color:var(--tx)}
+.mx{display:grid;grid-template-columns:repeat(3,52px);gap:4px}.mx svg{width:100%;height:auto;padding:2px}.pat .opt svg{width:56px;height:56px}
+.qm{font-size:2rem;color:var(--ac)}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;background:var(--bg);border:2px solid var(--bd);border-radius:10px;padding:12px}
+.opt.sel{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 12%,var(--card))}
+.pat .opts{grid-template-columns:1fr 1fr}.pat .opt{display:flex;justify-content:center}
+.dots{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}
+.dots button{width:28px;height:28px;border-radius:50%;border:1px solid var(--bd);background:var(--card);font-size:.75rem;padding:0}
+.dots .a{background:var(--ac);color:var(--on);border-color:var(--ac)}.dots .f{border:2px solid var(--hi)}.dots .c{outline:2px solid var(--tx);outline-offset:1px}
+.score{text-align:center}.score .n{font-size:4.5rem;font-weight:800;line-height:1;letter-spacing:-.03em}
+.dm{display:grid;grid-template-columns:90px 1fr 40px;gap:8px;align-items:center;margin:8px 0;font-size:.95rem}
+.dm .bar{margin:0;height:10px}.dm .bar i{background:var(--hi)}
+details{margin:8px 0}summary{cursor:pointer;font-weight:600}
+.rv{border-top:1px solid var(--bd);padding:10px 0}.ok{color:var(--ok)}.no{color:var(--bad)}
+.rv .vis{font-size:1rem}.rv svg{width:44px;height:44px}
+</style>
+<style>
+:root{--bg:#eef1f6;--card:#fff;--tx:#101828;--mu:#5b6578;--ac:#2f4bff;--on:#fff;--ok:#12803c;--bad:#c0262d;--bd:#d8deea;--hi:#ffb400;color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0d1220;--card:#151c2e;--tx:#eef1fb;--mu:#9aa5bf;--ac:#7d93ff;--on:#0d1220;--ok:#4ade80;--bad:#ff7b81;--bd:#26304a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0d1220;--card:#151c2e;--tx:#eef1fb;--mu:#9aa5bf;--ac:#7d93ff;--on:#0d1220;--ok:#4ade80;--bad:#ff7b81;--bd:#26304a;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 "Avenir Next","Segoe UI",system-ui,sans-serif}
+#app{max-width:560px;margin:0 auto;padding:16px}
+h1{font-size:2.2rem;line-height:1.1;margin:.3em 0 .4em;letter-spacing:-.02em}
+h2{font-size:1.25rem;line-height:1.3;margin:.3em 0 .6em}
+p{margin:.4em 0}.mu{color:var(--mu)}small{color:var(--mu)}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:18px;margin:12px 0}
+button{font:inherit;color:inherit;cursor:pointer}
+.btn{background:var(--ac);color:var(--on);border:0;border-radius:10px;padding:12px 18px;font-weight:600;width:100%}
+.btn.alt{background:transparent;color:var(--tx);border:1px solid var(--bd)}
+.row{display:flex;gap:8px;margin:10px 0}.row>*{flex:1}
+.top{display:flex;justify-content:space-between;align-items:center;font-weight:600}
+.bar{height:6px;background:var(--bd);border-radius:3px;margin:8px 0}.bar i{display:block;height:100%;background:var(--ac);border-radius:3px}
+.vis{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0 14px;font-size:1.5rem;font-weight:700;letter-spacing:.02em}
+.vis svg,.opt svg{border:1px solid var(--bd);border-radius:10px;padding:4px;background:var(--bg);color:var(--tx)}
+.mx{display:grid;grid-template-columns:repeat(3,52px);gap:4px}.mx svg{width:100%;height:auto;padding:2px}.pat .opt svg{width:56px;height:56px}
+.qm{font-size:2rem;color:var(--ac)}
+.opts{display:grid;gap:8px}
+.opt{text-align:left;background:var(--bg);border:2px solid var(--bd);border-radius:10px;padding:12px}
+.opt.sel{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 12%,var(--card))}
+.pat .opts{grid-template-columns:1fr 1fr}.pat .opt{display:flex;justify-content:center}
+.dots{display:flex;flex-wrap:wrap;gap:5px;margin:10px 0}
+.dots button{width:28px;height:28px;border-radius:50%;border:1px solid var(--bd);background:var(--card);font-size:.75rem;padding:0}
+.dots .a{background:var(--ac);color:var(--on);border-color:var(--ac)}.dots .f{border:2px solid var(--hi)}.dots .c{outline:2px solid var(--tx);outline-offset:1px}
+.score{text-align:center}.score .n{font-size:4.5rem;font-weight:800;line-height:1;letter-spacing:-.03em}
+.key{display:flex;justify-content:space-around;text-align:center;border:1px solid var(--bd);border-radius:10px;padding:8px;font-size:1.3rem}
+.dm{display:grid;grid-template-columns:130px 1fr 40px;gap:8px;align-items:center;margin:8px 0;font-size:.95rem}
+.dm .bar{margin:0;height:10px}.dm .bar i{background:var(--hi)}
+details{margin:8px 0}summary{cursor:pointer;font-weight:600}
+.rv{border-top:1px solid var(--bd);padding:10px 0}.ok{color:var(--ok)}.no{color:var(--bad)}
+.rv .vis{font-size:1rem}.rv svg{width:44px;height:44px}
 </style></head><body><div id="app"></div>
 <script>
 const $=s=>document.querySelector(s),R=(a,b)=>Math.floor(Math.random()*(b-a+1))+a,
 sh=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=R(0,i);[a[i],a[j]]=[a[j],a[i]]}return a},pk=a=>a[R(0,a.length-1)];
-const DOM=["Numerical","Verbal","Logic","Pattern"],
-AGES=[{n:"6–9",lv:[1,1,2,2,3],m:.55,t:1500},{n:"10–13",lv:[1,2,2,3,4],m:.5,t:1500},{n:"14–17",lv:[1,2,3,4,5],m:.47,t:1200},{n:"18–39",lv:[1,2,3,4,5],m:.45,t:1200},{n:"40–59",lv:[1,2,3,4,5],m:.45,t:1500},{n:"60+",lv:[1,2,3,4,5],m:.42,t:1800}];
+const DOM=["Numerical","Verbal","Logic","Matrices","Knowledge","Quantitative"],N=30,
+AGES=[{n:"6–9",lv:[1,1,2,2,3],m:.55,t:2100},{n:"10–13",lv:[1,2,2,3,4],m:.5,t:2100},{n:"14–17",lv:[1,2,3,4,5],m:.47,t:1800},{n:"18–39",lv:[1,2,3,4,5],m:.45,t:1800},{n:"40–59",lv:[1,2,3,4,5],m:.45,t:2100},{n:"60+",lv:[1,2,3,4,5],m:.42,t:2400}];
 let S=null,timer=null,AG=-1;
 function hist(){try{return JSON.parse(localStorage.getItem("bg_h")||"[]")}catch(e){return[]}}
 function saveH(h){try{localStorage.setItem("bg_h",JSON.stringify(h.slice(-10)))}catch(e){}}
 /* Numerical generator */
-function numOpts(ans){const s=new Set([ans]);while(s.size<4)s.add(ans+pk([-1,1])*R(1,6));const o=sh([...s]);return{o:o.map(String),a:o.indexOf(ans)}}
-function genNum(l){let t,e,a,b,d;
+function numOpts(ans){const s=new Set([ans]);while(s.size<4){const v=ans+pk([-1,1])*R(1,6);if(v>0)s.add(v)}const o=sh([...s]);return{o:o.map(String),a:o.indexOf(ans)}}
+function genNum(l,t){const A=t>0;let s,e,a,b,x,y;
+const V=[[()=>{a=R(1,A?20:10);x=pk(A?[2,3,4,5,6,7,9]:[1,2,3,5,10]);s=[0,1,2,3,4,5].map(i=>a+i*x);e='Each number adds '+x+'.'},()=>{x=pk(A?[2,3,4,5]:[1,2,3]);a=R(5,9)*x+5*x;s=[0,1,2,3,4,5].map(i=>a-i*x);e='Each number goes down by '+x+'.'}],
+[()=>{a=R(1,3);x=A?pk([2,3]):2;s=[0,1,2,3,4,5].map(i=>a*x**i);e='Each number is multiplied by '+x+'.'},()=>{a=R(10,30);x=R(2,A?9:4);y=R(1,x-1);s=[a];for(let i=0;i<5;i++)s.push(s[i]+(i%2?-y:x));e='The numbers go up '+x+', then down '+y+', repeating.'}],
+[()=>{a=R(1,9);x=R(1,3);s=[a];for(let i=0;i<5;i++)s.push(s[i]+x+i);e='The gap grows by 1 each step (+'+x+', +'+(x+1)+', +'+(x+2)+' …).'},()=>{a=R(1,6);s=[0,1,2,3,4,5].map(i=>(a+i)**2);e='These are square numbers: '+a+'², '+(a+1)+'², '+(a+2)+'² …'}],
+[()=>{a=R(2,9);b=R(30,60);x=R(2,5);y=R(2,6);s=[];for(let i=0;i<3;i++)s.push(a+i*x,b-i*y);e='Two series are interleaved: one adds '+x+', the other subtracts '+y+'.'},()=>{a=R(1,4);y=R(1,3);s=[a];for(let i=0;i<5;i++)s.push(s[i]*2+y);e='Each number is double the last, plus '+y+'.'}],
+[()=>{a=R(1,4);b=R(2,5);s=[a,b];for(let i=2;i<6;i++)s.push(s[i-1]+s[i-2]);e='Each number is the sum of the two before it.'},()=>{a=R(1,5);s=[0,1,2,3,4,5].map(i=>(a+i)*(a+i+1));e='Each is two consecutive numbers multiplied: '+a+'×'+(a+1)+', '+(a+1)+'×'+(a+2)+' …'}]];
+pk(A||l<3?V[l-1]:V[l-1].slice(0,1))();const o=numOpts(s[5]);return{d:0,l,q:'What number comes next?',v:s.slice(0,5).join(', ')+', <span class=qm>?</span>',o:o.o,a:o.a,e}}
+function genNumOld(l){let t,e,a,b,d;
  if(l==1){a=R(1,20);d=R(2,9);t=[0,1,2,3,4,5].map(i=>a+i*d);e="Each number adds "+d+".";}
  else if(l==2){a=R(1,4);d=R(2,3);t=[0,1,2,3,4,5].map(i=>a*d**i);e="Each number is multiplied by "+d+".";}
  else if(l==3){a=R(1,9);d=R(1,3);t=[a];for(let i=0;i<5;i++)t.push(t[i]+d+i);e="The gap grows by 1 each step (+"+d+", +"+(d+1)+", +"+(d+2)+" …).";}
@@ -64,7 +176,16 @@ function genNum(l){let t,e,a,b,d;
  const o=numOpts(t[5]);return{d:0,l,q:"What number comes next?",v:t.slice(0,5).join(", ")+", <span class=qm>?</span>",o:o.o,a:o.a,e}}
 /* Pattern generator */
 const cell=(a,n)=>{let c="";for(let i=0;i<n;i++)c+=`<circle cx="${40-(n-1)*8+i*16}" cy="68" r="4" fill="currentColor"/>`;return `<svg viewBox="0 0 80 80" width="56" height="56"><g transform="rotate(${a} 40 34)"><path d="M40 12v44M40 12l-10 12M40 12l10 12" stroke="currentColor" stroke-width="4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></g>${c}</svg>`};
-function genPat(l){const s=pk([45,90]),st=[];let a=R(0,7)*45,n=R(1,3);
+function mcell(s,n,f){const xs=n==1?[30]:n==2?[20,40]:[14,30,46],r=n==3?6:8;let g='';xs.forEach(x=>{g+=s==0?`<circle cx="${x}" cy="30" r="${r}"`:s==1?`<rect x="${x-r}" y="${30-r}" width="${2*r}" height="${2*r}"`:`<polygon points="${x},${30-r-1} ${x+r+1},${30+r} ${x-r-1},${30+r}"`;g+=` fill="${f?'currentColor':'none'}" fill-opacity="${f==2?.3:1}" stroke="currentColor" stroke-width="2.5"/>`});return `<svg viewBox="0 0 60 60" width="46" height="46">${g}</svg>`}
+function genMat(l,t){const P=sh([0,1,2]),Q=sh([0,1,2]);
+ const rule=[0,(r,c)=>[r,1,1],(r,c)=>[0,c+1,1],(r,c)=>[c,1,r],(r,c)=>[r,c+1,(r+c)%3],(r,c)=>[(r+c)%3,(r+2*c)%3+1,r]][l];
+ const sp=(r,c)=>{const x=rule(r,c);return[P[x[0]],x[1],Q[x[2]]]};
+ const e=['','Each row uses one shape. The last row’s shape is the one not used above.','The number of shapes goes up by one across each row (1, 2, 3).','The shape changes across each row in the same order, and the shading changes down each column.','Each row has its own shape, the count goes 1, 2, 3 across, and the shading shifts one step with each row and column.','Shape and count each rotate so they appear once in every row and column, while the shading stays the same along each row.'][l];
+ let cs='';for(let r=0;r<3;r++)for(let c=0;c<3;c++)cs+=(r==2&&c==2)?'<span class=qm style="display:grid;place-items:center">?</span>':mcell(...sp(r,c));
+ const ans=sp(2,2),seen=new Set([ans.join()]),op=[ans];
+ while(op.length<4){const c=ans.slice(),k=R(0,2);c[k]=k==1?R(1,3):R(0,2);if(!seen.has(c.join())){seen.add(c.join());op.push(c)}}
+ const o=sh(op);return{d:3,l,q:'Which piece completes the matrix?',v:'<div class=mx>'+cs+'</div>',o:o.map(x=>mcell(...x)),a:o.indexOf(ans),e,pat:1}}
+function genPat(l,t){const s=t?pk([45,90]):90,st=[];let a=R(0,7)*45,n=R(1,3);
  for(let i=0;i<5;i++){st.push([((a%360)+360)%360,n]);
   if(l==1)a+=s;else if(l==2)n=n%4+1;else if(l==3){a+=s;n=n%4+1}else if(l==4)a+=i%2?2*s:s;else{a+=s*(i+1);n=n%4+1}}
  const e=["","The arrow turns "+s+"° each step.","The dots go up by 1 each step (back to 1 after 4).","The arrow turns "+s+"° and the dots go up by 1 each step.","The arrow turns "+s+"°, then "+2*s+"°, alternately.","The arrow’s turn grows each step ("+s+"°, "+2*s+"°, …) while the dots cycle 1–4."][l];
@@ -72,7 +193,7 @@ function genPat(l){const s=pk([45,90]),st=[];let a=R(0,7)*45,n=R(1,3);
  while(op.length<4){const c=[(ans[0]+pk([-90,-45,45,90,135])+360)%360,Math.max(1,Math.min(4,ans[1]+pk([-1,0,0,1])))];if(!seen.has(c.join())){seen.add(c.join());op.push(c)}}
  const o=sh(op);return{d:3,l,q:"Which figure comes next in the sequence?",v:st.slice(0,4).map(x=>cell(x[0],x[1])).join("")+"<span class=qm>?</span>",o:o.map(x=>cell(x[0],x[1])),a:o.indexOf(ans),e,pat:1}}
 /* Static banks: [level, question, [correct first, ...wrong], explanation] */
-const VER=[
+const VER0=[
 [1,"Hot is to cold as up is to …",["down","high","warm","top"],"Opposites."],
 [1,"Which word means the same as “big”?",["Large","Tiny","Thin","Quiet"],"Large is a synonym of big."],
 [2,"Book is to reading as fork is to …",["eating","cooking","spoon","kitchen"],"Each tool is paired with its use."],
@@ -83,7 +204,7 @@ const VER=[
 [4,"Prologue is to epilogue as overture is to …",["finale","orchestra","opera","melody"],"Each pair is a beginning and its matching ending."],
 [5,"“Ephemeral” most nearly means …",["short-lived","enormous","ancient","fragile"],"Ephemeral things last a very short time."],
 [5,"Lax is to strict as lenient is to …",["harsh","gentle","kind","tired"],"Each pair is opposites; lenient is the opposite of harsh."]];
-const LOG=[
+const LOG0=[
 [1,"All cats are animals. Tom is a cat. Therefore Tom is …",["an animal","a dog","not an animal","a bird"],"If all cats are animals, Tom is an animal."],
 [1,"Which does not belong: Apple, Banana, Carrot, Grape?",["Carrot","Apple","Banana","Grape"],"Carrot is a vegetable; the rest are fruit."],
 [2,"Sam is taller than Ben. Ben is taller than Lee. Who is shortest?",["Lee","Ben","Sam","Cannot tell"],"Sam > Ben > Lee."],
@@ -94,36 +215,61 @@ const LOG=[
 [4,"A father is 3 times as old as his son. In 12 years he will be twice as old. How old is the son now?",["12","6","9","15"],"3s + 12 = 2(s + 12), so s = 12."],
 [5,"Anna: “Ben is lying.” Ben: “Cara is lying.” Cara: “Anna and Ben are both lying.” Who is telling the truth?",["Only Ben","Only Anna","Only Cara","All three"],"If Anna were truthful, Cara would be too, which contradicts Cara’s claim. So Anna lies, Ben is truthful, Cara lies."],
 [5,"A clock gains 5 minutes every hour and is set right at noon. What does it show when the true time is 6 pm?",["6:30 pm","6:05 pm","6:25 pm","6:35 pm"],"6 hours × 5 minutes = 30 minutes gained."]];
-function stat(bank,d,l,u){const x=pk(bank.filter(b=>b[0]==l&&!u.has(b[1])));u.add(x[1]);const c=x[2][0],o=sh(x[2]);return{d,l,q:x[1],o,a:o.indexOf(c),e:x[3]}}
-function build(c){const q=[],u=new Set();c.lv.forEach(l=>q.push(genNum(l),stat(VER,1,l,u),stat(LOG,2,l,u),genPat(l)));return q}
+const VERN=[[1,'Which word means the opposite of “happy”?',['sad','glad','funny','loud'],'Happy and sad are opposites.','0'],[1,'A puppy is a baby dog. A kitten is a baby …',['cat','bird','fish','cow'],'A kitten is a baby cat.','0'],[1,'Which word goes with “bird”?',['fly','swim','crawl','roar'],'Birds fly.','0'],[2,'Day is to sun as night is to …',['moon','sleep','dark','bed'],'The sun shows in the day, the moon at night.','01'],[2,'Which word means the same as “tiny”?',['small','huge','tall','fast'],'Tiny means very small.','0'],[2,'Shoe is to foot as hat is to …',['head','hand','hair','coat'],'A shoe goes on the foot, a hat on the head.','01'],[2,'Which word does not belong: dog, cat, cow, chair?',['chair','dog','cat','cow'],'A chair is not an animal.','0'],[3,'Fish is to water as bird is to …',['air','nest','tree','egg'],'Fish move through water, birds through air.','01'],[3,'Which word means the opposite of “brave”?',['scared','strong','kind','quick'],'Brave means not afraid; scared is the opposite.','01'],[2,'Which word means the same as “huge”?',['enormous','narrow','quiet','soft'],'Huge and enormous both mean very big.','1'],[3,'Pen is to writer as brush is to …',['painter','paint','canvas','color'],'A tool and the person who uses it.','1'],[3,'Which word means the opposite of “ancient”?',['modern','old','dusty','famous'],'Ancient means very old; modern is the opposite.','1'],[3,'Library is to books as museum is to …',['artifacts','tickets','guides','walls'],'A place and what it keeps.','1'],[4,'“Reluctant” most nearly means …',['unwilling','eager','tired','angry'],'Reluctant means not wanting to do something.','1'],[4,'Cub is to bear as calf is to …',['cow','bull','horse','goat'],'A cub is a young bear; a calf is a young cow.','1'],[4,'Which word is the opposite of “generous”?',['selfish','kind','wealthy','polite'],'Generous people give freely; selfish is the opposite.','1'],[1,'Which word means the same as “begin”?',['start','finish','wait','stop'],'Start and begin are synonyms.','2'],[2,'Which word is the opposite of “expand”?',['shrink','grow','stretch','open'],'Expand means to grow larger.','2'],[3,'Thermometer is to temperature as ruler is to …',['length','wood','measure','line'],'An instrument and what it measures.','2'],[3,'“Meticulous” most nearly means …',['careful','clumsy','quick','loud'],'Meticulous means very careful about details.','2'],[4,'Verbose is to concise as lavish is to …',['frugal','generous','rich','plain'],'Each pair is opposites: lavish and frugal.','2'],[4,'“Pragmatic” most nearly means …',['practical','dreamy','stubborn','friendly'],'Pragmatic means focused on what works in practice.','2'],[5,'“Obsequious” most nearly means …',['overly eager to please','rude','wise','lazy'],'Obsequious describes fawning, servile behavior.','2'],[5,'Cacophony is to harmony as chaos is to …',['order','noise','music','fear'],'Cacophony is the opposite of harmony; chaos of order.','2']],
+LOGN=[[1,'Tom has 3 apples and gets 2 more. How many does he have?',['5','4','6','1'],'3 + 2 = 5.','0'],[1,'Which is the odd one out: red, blue, green, table?',['table','red','blue','green'],'The others are colors.','0'],[1,'What comes next: Monday, Tuesday, Wednesday, …',['Thursday','Friday','Sunday','Monday'],'Days follow in order.','0'],[2,'A cat has 4 legs. How many legs do 3 cats have?',['12','7','9','8'],'3 × 4 = 12.','0'],[2,'Mia is older than Leo. Leo is older than Sam. Who is the youngest?',['Sam','Leo','Mia','Cannot tell'],'Mia > Leo > Sam.','0'],[2,'All dogs bark and Rex is a dog. So Rex …',['barks','flies','is a cat','is a bird'],'All dogs bark, so Rex barks.','0'],[3,'There are 10 sweets. You eat 3 and give 4 away. How many are left?',['3','7','6','4'],'10 − 3 − 4 = 3.','01'],[3,'A train leaves at 2 o’clock and the trip takes 3 hours. When does it arrive?',['5 o’clock','6 o’clock','4 o’clock','1 o’clock'],'2 + 3 = 5.','01'],[2,'Which is the odd one out: 12, 18, 24, 25, 30?',['25','12','18','30'],'The others are multiples of 6.','1'],[3,'A bag has 5 red and 3 blue marbles. Which color are you more likely to pick?',['red','blue','equally likely','green'],'There are more red marbles.','1'],[3,'If today is Wednesday, what day will it be in 10 days?',['Saturday','Friday','Sunday','Monday'],'10 days is 1 week and 3 days; Wednesday + 3 = Saturday.','1'],[4,'Five friends share 40 stickers equally. Then 3 more friends join and all 8 share the 40 stickers equally. How many does each get?',['5','8','10','4'],'40 ÷ 8 = 5.','1'],[4,'All squares are rectangles. Some rectangles are red. Which must be true?',['All squares are rectangles','All rectangles are squares','Some squares are red','No squares are red'],'Only the first statement is guaranteed.','1'],[4,'A rope is cut into 4 equal pieces of 15 cm each. How long was the rope?',['60 cm','45 cm','19 cm','30 cm'],'4 × 15 = 60.','1'],[1,'Which does not belong: Monday, Friday, July, Sunday?',['July','Monday','Friday','Sunday'],'July is a month; the others are days.','2'],[2,'A shirt costs $20 and is 25% off. What is the sale price?',['$15','$5','$18','$10'],'25% of 20 is 5, and 20 − 5 = 15.','2'],[3,'If 5 machines make 5 items in 5 minutes, how long do 100 machines take to make 100 items?',['5 minutes','100 minutes','20 minutes','1 minute'],'Each machine makes one item in 5 minutes.','2'],[4,'Two trains 300 km apart travel toward each other at 60 and 40 km/h. When do they meet?',['3 hours','5 hours','2 hours','4 hours'],'Closing speed is 100 km/h; 300 ÷ 100 = 3.','2'],[5,'In a race you pass the person in second place. What place are you in?',['Second','First','Third','Cannot tell'],'You take second place, not first.','2'],[5,'A lily patch doubles in size each day and covers the lake on day 30. On which day did it cover half the lake?',['Day 29','Day 15','Day 28','Day 25'],'It doubles daily, so half the lake is one day earlier.','2']];
+const tg=x=>[...x,x[0]<2?'012':x[0]<4?'12':'2'],VER=VER0.map(tg).concat(VERN),LOG=LOG0.map(tg).concat(LOGN);
+let SEEN=new Set();try{SEEN=new Set(JSON.parse(localStorage.getItem('bg_s')||'[]'))}catch(e){}
+function stat(bank,d,l,u,t){let p=bank.filter(b=>b[0]==l&&b[4].includes(t)&&!u.has(b[1]));if(!p.length)p=bank.filter(b=>b[0]==l&&!u.has(b[1]));const f=p.filter(b=>!SEEN.has(b[1])),x=pk(f.length?f:p);u.add(x[1]);SEEN.add(x[1]);const c=x[2][0],o=sh(x[2]);return{d,l,q:x[1],o,a:o.indexOf(c),e:x[3]}}
+const KNO=[[1,'How many days are in a week?',['7','5','10','12'],'There are 7 days in a week.','0'],[1,'Which animal gives us milk?',['cow','snake','eagle','shark'],'Cows give milk.','0'],[1,'What do plants need to grow?',['water and sunlight','only sand','only ice','only metal'],'Plants need water and light.','0'],[1,'How many continents are there?',['7','5','6','8'],'There are 7 continents.','12'],[1,'What is the largest ocean on Earth?',['Pacific','Atlantic','Indian','Arctic'],'The Pacific is the largest ocean.','2'],[2,'Which is the biggest animal?',['whale','dog','lion','goat'],'The blue whale is the largest animal.','0'],[2,'How many months are in a year?',['12','10','7','24'],'There are 12 months in a year.','0'],[2,'What do we use our eyes for?',['seeing','hearing','tasting','smelling'],'Eyes are for seeing.','0'],[2,'Which gas do humans need to breathe to live?',['oxygen','helium','neon','hydrogen'],'We need oxygen to live.','1'],[2,'What is the largest planet in our solar system?',['Jupiter','Earth','Mars','Venus'],'Jupiter is the largest planet.','12'],[2,'Which element has the chemical symbol \u201cO\u201d?',['oxygen','gold','iron','silver'],'O stands for oxygen.','2'],[3,'What is the capital city of Nigeria?',['Abuja','Lagos','Kano','Ibadan'],'Abuja is the capital of Nigeria.','01'],[3,'Which planet do we live on?',['Earth','Mars','Venus','Jupiter'],'We live on Earth.','01'],[3,'Which continent is Egypt mainly in?',['Africa','Asia','Europe','South America'],'Egypt is mainly in Africa.','1'],[3,'At what temperature does water boil at sea level?',['100 \u00b0C','50 \u00b0C','0 \u00b0C','200 \u00b0C'],'Water boils at 100 \u00b0C.','1'],[3,'Which organ pumps blood around the body?',['heart','lungs','liver','stomach'],'The heart pumps blood.','1'],[3,'In which year did World War II end?',['1945','1918','1939','1963'],'It ended in 1945.','2'],[3,'What is the powerhouse of the cell?',['mitochondria','nucleus','ribosome','membrane'],'Mitochondria produce most of a cell\u2019s energy.','2'],[4,'Who wrote the play \u201cRomeo and Juliet\u201d?',['William Shakespeare','Charles Dickens','Chinua Achebe','Mark Twain'],'Shakespeare wrote it.','1'],[4,'Which layer of the Earth do we live on?',['crust','core','mantle','outer core'],'We live on the crust.','1'],[4,'What does GDP stand for?',['Gross Domestic Product','General Domestic Profit','Global Demand Price','Gross Daily Payment'],'GDP measures a country\u2019s economic output.','2'],[4,'Who proposed the theory of general relativity?',['Albert Einstein','Isaac Newton','Niels Bohr','Galileo Galilei'],'Einstein proposed it.','2'],[5,'What is a market with only one seller called?',['monopoly','oligopoly','duopoly','monopsony'],'One seller is a monopoly.','2'],[5,'What is the approximate speed of light?',['300,000 km/s','30,000 km/s','3,000 km/s','3 million km/s'],'About 300,000 km per second.','2']];
+const QUA=[[1,'You have 4 sweets and get 3 more. How many now?',['7','1','12','6'],'4 + 3 = 7.','0'],[1,'Which is more: 9 or 5?',['9','5','They are equal','Cannot tell'],'9 is greater than 5.','0'],[1,'There are 10 birds and 4 fly away. How many are left?',['6','14','4','5'],'10 \u2212 4 = 6.','0'],[1,'What is 15 + 27?',['42','32','41','52'],'15 + 27 = 42.','12'],[1,'What is 12 \u00d7 6?',['72','62','66','76'],'12 \u00d7 6 = 72.','2'],[2,'How many wheels are on 3 bicycles?',['6','3','5','9'],'3 \u00d7 2 = 6.','0'],[2,'What is half of 12?',['6','4','8','3'],'12 \u00f7 2 = 6.','0'],[2,'Ada has 5 pencils. Kemi has 3 more than Ada. How many does Kemi have?',['8','2','15','7'],'5 + 3 = 8.','0'],[2,'What is 7 \u00d7 8?',['56','54','48','63'],'7 \u00d7 8 = 56.','12'],[2,'A pen costs 50 naira. How much do 6 pens cost?',['300 naira','250 naira','350 naira','56 naira'],'6 \u00d7 50 = 300.','12'],[2,'What is 15% of 200?',['30','15','20','35'],'0.15 \u00d7 200 = 30.','2'],[3,'A box holds 6 eggs. How many eggs are in 4 boxes?',['24','10','20','18'],'4 \u00d7 6 = 24.','01'],[3,'You share 20 stickers equally among 4 friends. How many does each get?',['5','4','16','24'],'20 \u00f7 4 = 5.','01'],[3,'What is 25% of 80?',['20','25','40','16'],'A quarter of 80 is 20.','12'],[3,'A bus travels 60 km in 1 hour. How far does it go in 3 hours?',['180 km','63 km','120 km','90 km'],'60 \u00d7 3 = 180.','12'],[3,'A car travels 150 km in 2.5 hours. What is its average speed?',['60 km/h','50 km/h','75 km/h','65 km/h'],'150 \u00f7 2.5 = 60.','2'],[3,'If 3x + 4 = 19, what is x?',['5','4','6','15'],'3x = 15, so x = 5.','2'],[4,'The sum of three consecutive numbers is 33. What is the largest?',['12','10','11','13'],'10 + 11 + 12 = 33.','1'],[4,'A rectangle is 8 cm long and 5 cm wide. What is its area?',['40 cm\u00b2','26 cm\u00b2','13 cm\u00b2','35 cm\u00b2'],'8 \u00d7 5 = 40.','1'],[4,'A price rises 20% and then falls 20%. Compared with the start, the price is \u2026',['4% lower','the same','4% higher','20% lower'],'1.2 \u00d7 0.8 = 0.96, so 4% lower.','2'],[4,'The average of five numbers is 12. Four of them add up to 44. What is the fifth?',['16','12','8','20'],'The total is 60, and 60 \u2212 44 = 16.','2'],[5,'One pipe fills a tank in 6 hours and another in 3 hours. Together, how long do they take?',['2 hours','4.5 hours','3 hours','9 hours'],'1/6 + 1/3 = 1/2 of the tank per hour.','2'],[5,'What is the next prime number after 31?',['37','33','35','39'],'33 and 35 are not prime; 37 is.','2']];
+function build(c){const t=AG<1?0:AG==1?1:2,q=[],u=new Set(),g=(f,l)=>{let x,i=0;do{x=f(l,t)}while(u.has(x.v)&&i++<9);u.add(x.v);return x};
+c.lv.forEach(l=>q.push(g(genNum,l),stat(VER,1,l,u,t),stat(LOG,2,l,u,t),g(genMat,l),stat(KNO,4,l,u,t),stat(QUA,5,l,u,t)));
+try{localStorage.setItem('bg_s',JSON.stringify([...SEEN].slice(-250)))}catch(e){}return q}
 /* Flow */
-function intro(){const h=hist();$("#app").innerHTML=`<h1>BrainGauge</h1><p>A 20-question reasoning test across numbers, words, logic and patterns. It gets harder as you go.</p>
-<div class=card><b>Choose your age group</b><div class=opts id=ages style="grid-template-columns:1fr 1fr 1fr;margin:10px 0">${AGES.map((a,k)=>`<button class="opt${k==AG?" sel":""}" data-g=${k}>${a.n}</button>`).join("")}</div><b>20 questions · ${AG<0?"20–30":AGES[AG].t/60} minutes</b><p class=mu>Questions and scoring are matched to the age group. You can go back, flag questions and change answers until you submit. Skipped questions count as wrong.</p></div>
+function intro(){const h=hist();$("#app").innerHTML=`<h1>BrainGauge</h1><p>A reasoning test covering numbers, words, logic, picture matrices (like Raven’s), general knowledge and quantitative problems, followed by short memory and speed tasks. It gets harder as you go.</p>
+<div class=card><b>Choose your age group</b><div class=opts id=ages style="grid-template-columns:1fr 1fr 1fr;margin:10px 0">${AGES.map((a,k)=>`<button class="opt${k==AG?" sel":""}" data-g=${k}>${a.n}</button>`).join("")}</div><b>30 questions + 2 quick tasks · ${AG<0?"30–40":AGES[AG].t/60} minutes</b><p class=mu>Questions and scoring are matched to the age group, and fresh questions are picked each time. You can go back, flag questions and change answers until you submit. Skipped questions count as wrong.</p></div>
 <button class=btn id=go ${AG<0?"disabled":""}>Start test</button>
 ${h.length?`<div class=card><b>Your past scores</b><p class=mu>${h.slice().reverse().map(x=>x.iq+" (age "+(x.a||"?")+")").join(" · ")}</p></div>`:""}
 <p><small>This is an estimate for fun and practice, not a clinical or professionally administered IQ test. Scores are saved only in this browser.</small></p>`;
 $("#go").onclick=start;$("#ages").onclick=e=>{const b=e.target.closest("button");if(b){AG=+b.dataset.g;intro()}}}
-function start(){const c=AGES[AG];S={c,qs:build(c),ans:Array(20).fill(null),fl:Array(20).fill(false),i:0,left:c.t,warn:0};clearInterval(timer);timer=setInterval(()=>{S.left--;tick();if(S.left<=0)finish()},1000);show()}
+function start(){const c=AGES[AG];S={c,qs:build(c),ans:Array(N).fill(null),fl:Array(N).fill(false),i:0,left:c.t,warn:0};clearInterval(timer);timer=setInterval(()=>{S.left--;tick();if(S.left<=0)finish()},1000);show()}
 const fmt=s=>Math.floor(s/60)+":"+String(s%60).padStart(2,"0");
 function tick(){const t=$("#tm");if(t){t.textContent=fmt(Math.max(0,S.left));t.style.color=S.left<120?"var(--bad)":""}}
 function show(){const q=S.qs[S.i],n=S.ans.filter(x=>x!=null).length;
-$("#app").innerHTML=`<div class=top><span>Question ${S.i+1} of 20</span><span id=tm></span></div><div class=bar><i style="width:${n*5}%"></i></div>
+$("#app").innerHTML=`<div class=top><span>Question ${S.i+1} of ${N}</span><span id=tm></span></div><div class=bar><i style="width:${n/N*100}%"></i></div>
 <div class="card ${q.pat?"pat":""}"><small>${DOM[q.d]}</small><h2>${q.q}</h2>${q.v?`<div class=vis>${q.v}</div>`:""}
 <div class=opts>${q.o.map((o,k)=>`<button class="opt${S.ans[S.i]===k?" sel":""}" data-k=${k}>${o}</button>`).join("")}</div></div>
-<div class=row><button class="btn alt" id=pv ${S.i?"":"disabled"}>Back</button><button class="btn alt" id=fl>${S.fl[S.i]?"Unflag":"Flag"}</button><button class="btn" id=nx>${S.i<19?"Next":"Review"}</button></div>
+<div class=row><button class="btn alt" id=pv ${S.i?"":"disabled"}>Back</button><button class="btn alt" id=fl>${S.fl[S.i]?"Unflag":"Flag"}</button><button class="btn" id=nx>${S.i<N-1?"Next":"Review"}</button></div>
 <div class=dots>${S.qs.map((_,k)=>`<button data-j=${k} class="${S.ans[k]!=null?"a ":""}${S.fl[k]?"f ":""}${k==S.i?"c":""}">${k+1}</button>`).join("")}</div>
-<button class=btn id=sb>${n==20?"Submit test":"Submit test ("+(20-n)+" unanswered)"}</button>`;tick()}
-$("#app").onclick=e=>{if(!S||S.done)return;const b=e.target.closest("button");if(!b)return;
+<button class=btn id=sb>${n==N?"Submit test":"Submit test ("+(N-n)+" unanswered)"}</button>`;tick()}
+$("#app").onclick=e=>{if(S&&S.tap)return S.tap(e);if(!S||S.done)return;const b=e.target.closest("button");if(!b)return;
  if(b.dataset.k!=null){S.ans[S.i]=+b.dataset.k;S.warn=0;show()}
  else if(b.dataset.j!=null){S.i=+b.dataset.j;show()}
  else if(b.id=="pv"){S.i--;show()}
- else if(b.id=="nx"){if(S.i<19)S.i++;else{const f=S.fl.findIndex(x=>x);const u=S.ans.findIndex(x=>x==null);S.i=u>=0?u:f>=0?f:19}show()}
+ else if(b.id=="nx"){if(S.i<N-1)S.i++;else{const f=S.fl.findIndex(x=>x);const u=S.ans.findIndex(x=>x==null);S.i=u>=0?u:f>=0?f:N-1}show()}
  else if(b.id=="fl"){S.fl[S.i]=!S.fl[S.i];show()}
  else if(b.id=="sb"){const u=S.ans.filter(x=>x==null).length;if(u&&!S.warn){S.warn=1;b.textContent=u+" unanswered. Tap again to submit";return}finish()}};
 const cdf=z=>{const t=1/(1+.2316419*Math.abs(z)),d=.3989423*Math.exp(-z*z/2),p=d*t*(.3193815+t*(-.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));return z>0?1-p:p};
-function finish(){clearInterval(timer);S.done=1;const w=[0,0,0,0],m=[0,0,0,0];let raw=0;
+function ph(h,t,f){S.tap=e=>{if(e.target.closest('#nx2')){S.tap=null;f()}};$('#app').innerHTML=`<h2>${h}</h2><div class=card><p>${t}</p></div><button class=btn id=nx2>Start</button>`}
+function wmRun(mode,done){let len=mode?2:(AG==0?2:3),fails=0,best=0;const max=mode?8:9;
+ const next=()=>{const seq=Array.from({length:len},()=>R(0,9));let i=0,ans='';
+  $('#app').innerHTML=`<div class=card style="text-align:center"><small>${mode?'Memorize the digits (you will type them in reverse)':'Memorize the digits'}</small><div id=dg style="font-size:4.5rem;font-weight:800;min-height:6rem"></div></div>`;
+  const step=()=>{if(i<seq.length){const d=$('#dg');if(d)d.textContent=seq[i++];setTimeout(()=>{const d2=$('#dg');if(d2)d2.textContent='';setTimeout(step,350)},850)}else ask()};
+  const ask=()=>{$('#app').innerHTML=`<div class=card style="text-align:center"><small>Type the digits${mode?' in reverse order':''}</small><div id=en style="font-size:2rem;font-weight:700;min-height:3rem;letter-spacing:.25em"></div><div class=opts style="grid-template-columns:repeat(3,1fr)">${[1,2,3,4,5,6,7,8,9,'\u232b',0,'OK'].map(k=>`<button class=opt data-p="${k}">${k}</button>`).join('')}</div></div>`;
+   S.tap=e=>{const b=e.target.closest('button');if(!b||b.dataset.p==null)return;const k=b.dataset.p;
+    if(k=='OK'){S.tap=null;const ex=(mode?seq.slice().reverse():seq).join('');if(ans==ex){best=len;len++;fails=0}else fails++;if(fails>=2||len>max)done(best);else next();return}
+    if(k=='\u232b')ans=ans.slice(0,-1);else if(ans.length<len)ans+=k;$('#en').textContent=ans}};
+  setTimeout(step,600)};
+ next()}
+function spd(done){const sy=['\u25b2','\u25cf','\u25a0','\u25c6','\u2605','\u2665'],mp=sh([1,2,3,4,5,6]),T=AG<2?60:45;let n=0,w=0,cur=R(0,5),left=T,iv;
+ const draw=()=>{$('#app').innerHTML=`<div class=top><span>Match the symbols</span><span id=sc>${left}s</span></div><div class=card><div class=key>${sy.map((x,i)=>`<div><b>${x}</b><br>${mp[i]}</div>`).join('')}</div><div style="font-size:5rem;text-align:center;margin:10px 0">${sy[cur]}</div><div class=opts style="grid-template-columns:repeat(3,1fr)">${[1,2,3,4,5,6].map(k=>`<button class=opt data-p="${k}">${k}</button>`).join('')}</div></div>`};
+ S.tap=e=>{const b=e.target.closest('button');if(!b||b.dataset.p==null)return;if(+b.dataset.p===mp[cur])n++;else w++;let c;do{c=R(0,5)}while(c==cur);cur=c;draw()};
+ draw();iv=setInterval(()=>{left--;const t=$('#sc');if(t)t.textContent=left+'s';if(left<=0){clearInterval(iv);S.tap=null;done(Math.max(0,n-Math.floor(w/2)))}},1000)}
+function phase2(){S.wm=[0,0];S.sp=0;ph('Part 2: Memory','Digits will appear one at a time. Afterwards, type them back in the same order. Each round gets longer.',()=>wmRun(0,a=>{S.wm[0]=a;ph('Now in reverse','Next, type the digits back in reverse order. If you see 3, 8, 1 you enter 1, 8, 3.',()=>wmRun(1,b=>{S.wm[1]=b;ph('Part 3: Speed','Match each symbol to its number using the key at the top. You have '+(AG<2?60:45)+' seconds. Go as fast as you can.',()=>spd(r=>{S.sp=r;results()}))}))}))}
+function finish(){clearInterval(timer);S.done=1;phase2()}
+function results(){const w=[0,0,0,0,0,0],m=[0,0,0,0,0,0];let raw=0;
 S.qs.forEach((q,k)=>{m[q.d]+=q.l;if(S.ans[k]===q.a){w[q.d]+=q.l;raw+=q.l}});
-const mx=m[0]+m[1]+m[2]+m[3],iq=Math.round(Math.max(70,Math.min(145,100+15*(raw/mx-S.c.m)/.15))),pc=Math.min(99.9,Math.max(0.1,cdf((iq-100)/15)*100));
+const dv=m.map((x,k)=>w[k]/x-S.c.m),ES=[5,7,9,11,11,9.5][AG],EP=[12,18,24,30,28,22][AG],dW=(S.wm[0]+S.wm[1]-ES)/12,dS=(S.sp-EP)/60,dev=(dv.reduce((a,b)=>a+b,0)+dW+dS)/8,ix=d=>Math.round(Math.max(55,Math.min(145,100+100*d))),iq=Math.max(70,ix(dev)),pc=Math.min(99.9,Math.max(0.1,cdf((iq-100)/15)*100));
 const date=new Date().toLocaleDateString(),h=hist();h.push({iq,d:date,a:S.c.n});saveH(h);S.res={iq};
 const cat=iq>=130?"Very high":iq>=115?"Above average":iq>=85?"Average":"Below average";
 const arc=Math.round((iq-70)/75*100);
@@ -131,6 +277,7 @@ $("#app").innerHTML=`<div class="card score"><small>Your estimated IQ</small>
 <svg viewBox="0 0 200 110" width="220"><path d="M20 100A80 80 0 0 1 180 100" fill="none" stroke="var(--bd)" stroke-width="14" stroke-linecap="round" pathLength="100"/><path d="M20 100A80 80 0 0 1 180 100" fill="none" stroke="var(--ac)" stroke-width="14" stroke-linecap="round" pathLength="100" stroke-dasharray="${arc} 100"/><text x="100" y="92" text-anchor="middle" font-size="44" font-weight="800" fill="var(--tx)">${iq}</text></svg>
 <p><b>${cat}</b> · likely range ${iq-7}–${iq+7}</p><p class=mu>Higher than about ${Math.round(pc)}% of people aged ${S.c.n} on the rough scale used here.</p></div>
 <div class=card><b>By area</b>${DOM.map((n,k)=>{const p=Math.round(w[k]/m[k]*100);return `<div class=dm><span>${n}</span><div class=bar><i style="width:${p}%"></i></div><span>${p}%</span></div>`}).join("")}</div>
+<div class=card><b>Index scores</b> <small>(Wechsler and Stanford-Binet style)</small>${[['Verbal',(dv[1]+dv[4])/2],['Fluid reasoning',(dv[2]+dv[3])/2],['Quantitative',(dv[0]+dv[5])/2],['Working memory',dW],['Processing speed',dS]].map(a=>`<div class=dm><span>${a[0]}</span><div class=bar><i style="width:${(ix(a[1])-55)/.9}%"></i></div><span>${ix(a[1])}</span></div>`).join('')}<p class=mu>Memory: ${S.wm[0]} digits forward, ${S.wm[1]} in reverse. Speed: ${S.sp} correct matches.</p></div>
 <details class=card><summary>Review answers (${S.qs.filter((q,k)=>S.ans[k]!==q.a).length} missed)</summary>${S.qs.map((q,k)=>{const ok=S.ans[k]===q.a;return `<div class=rv><b class="${ok?"ok":"no"}">${ok?"Correct":"Missed"}</b> · <small>${DOM[q.d]}, level ${q.l}</small><p>${q.q}</p>${q.v?`<div class=vis>${q.v}</div>`:""}${ok?"":`<p class=mu>You chose: ${S.ans[k]==null?"no answer":q.o[S.ans[k]]}</p>`}<p>Answer: ${q.o[q.a]}</p><p class=mu>${q.e}</p></div>`}).join("")}</details>
 <div class=row><button class="btn alt" id=cp>Copy result</button><button class=btn id=re>New test</button></div>
 <p><small>Estimate only. Scores are adjusted by age group using rough assumptions, not real norm data, and are not a clinical IQ result.</small></p>`;
